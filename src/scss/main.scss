@@ -1,0 +1,56 @@
+@import '../../lib/normalize';
+@import 'vars';
+@import 'components/clearfix';
+@import 'components/login';
+
+@font-face {
+  font-family: 'Atma-Bold';
+  src: url('assets/fonts/Atma-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Atma-Regular';
+  src: url('assets/fonts/Atma-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans-Semibold';
+  src: url('assets/fonts/OpenSans-Semibold.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  src: url('assets/fonts/OpenSans-Regular.ttf');
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: $color-red;
+	animation: pulse 37s infinite;
+	font-family: 'OpenSans-Regular';
+}
+
+@keyframes pulse {
+	0% {
+		background-color: $color-red;
+	}
+
+	20% {
+		background-color: $color-orange;
+	}
+
+	40% {
+		background-color: $color-green;
+	}
+
+	60% {
+		background-color: $color-blue;
+	}
+
+	80% {
+		background-color: $color-purple;
+	}
+}

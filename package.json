@@ -1,5 +1,5 @@
 {
-  "name": "project-scaffold",
+  "name": "outlines-project",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -8,19 +8,32 @@
     "postinstall": "cp node_modules/normalize.css/normalize.css lib/_normalize.scss",
     "watch:css": "sass --watch src/scss:build",
     "build:js": "browserify src/js/main.js -o build/main.js",
+    "build:test": "browserify test/src/main.js -o  test/main.js",
     "watch:js": "watchify src/js/main.js -o build/main.js",
-    "dev": "npm start & npm run watch:js & npm run watch:css"
+    "watch:test": "watchify test/src/main.js -o test/main.js",
+    "dev": "npm start & npm run watch:js & npm run watch:css & npm run watch:test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.1",
     "normalize.css": "^4.1.1",
+    "backbone": "^1.3.3",
+    "jquery": "^3.1.0",
+    "underscore": "^1.8.3",
     "watchify": "^3.7.0"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "cors": "^2.7.1",
-    "express": "^4.14.0"
+    "chai": "^3.5.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "lodash": "^4.13.1",
+    "lowdb": "^0.13.1",
+    "mocha": "^2.5.3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "sinon": "^1.17.4",
+    "uuid": "^2.0.2"
   }
 }
