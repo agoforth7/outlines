@@ -9,19 +9,39 @@
       "id": "87864e51-4137-49d2-81e1-68536bf7425c",
       "username": "amanda",
       "password": "amanda"
+    },
+    {
+      "id": "8d9249a6-635a-42b7-894f-a7120ae60fd6",
+      "username": "eric",
+      "password": "eric"
+    },
+    {
+      "id": "cf2dd4d2-591c-4ff6-9b0c-a5534b8f0071",
+      "username": "bolling",
+      "password": "bolling"
+    },
+    {
+      "id": "66a5e484-7e04-45be-944b-a7e1b17c5718",
+      "username": "chicken",
+      "password": "nuggets"
+    },
+    {
+      "id": "a3b479d1-eca0-4fa2-8448-685b36637d97",
+      "username": "yo",
+      "password": "yo"
     }
   ],
   "pages": [
     {
       "id": "01fe2a97-af9b-4482-b420-0739bbcc7519",
       "userId": "2c38a84f-c9ce-4212-8f14-ff1b1509400b",
-      "title": "I love cookies",
+      "title": "I love turtles",
       "objects": []
     },
     {
       "id": "ccb34101-0550-4140-b808-280457745fc5",
       "userId": "2c38a84f-c9ce-4212-8f14-ff1b1509400b",
-      "title": "Hello amanda",
+      "title": "Changeable!",
       "objects": []
     },
     {
@@ -39,7 +59,7 @@
     {
       "id": "5caf6020-74ca-4e14-bfc0-ac7a277f9b50",
       "userId": "2c38a84f-c9ce-4212-8f14-ff1b1509400b",
-      "title": "New Page",
+      "title": "My Newest Page",
       "objects": []
     },
     {
@@ -63,13 +83,87 @@
     {
       "id": "7f8566a0-d3ef-4ce4-bcb7-eced419f2fec",
       "userId": "87864e51-4137-49d2-81e1-68536bf7425c",
-      "title": "My Sweet Coloring Page",
-      "objects": []
+      "title": "Hello Amanda!",
+      "objects": [
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        },
+        {
+          "id": "2",
+          "x": 0,
+          "y": 0
+        }
+      ]
     },
     {
       "id": "468cc225-1231-49a0-b23c-cd2706c92647",
       "userId": "87864e51-4137-49d2-81e1-68536bf7425c",
       "title": "Blah blah blah blah blahdifjasodifjaosidjfosaijdf",
+      "objects": []
+    },
+    {
+      "id": "c8501b9f-6618-4dd5-87e3-d922305a5146",
+      "userId": "2c38a84f-c9ce-4212-8f14-ff1b1509400b",
+      "title": "Yippee!",
+      "objects": []
+    },
+    {
+      "id": "f727cd91-82b8-4d64-8099-94f548c84960",
+      "userId": "2c38a84f-c9ce-4212-8f14-ff1b1509400b",
+      "title": "Yet another page!",
+      "objects": []
+    },
+    {
+      "id": "cfb51e51-45fa-4d6a-a540-e1c993a95050",
+      "userId": "2c38a84f-c9ce-4212-8f14-ff1b1509400b",
+      "title": "New Page",
       "objects": []
     }
   ],

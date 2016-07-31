@@ -196,7 +196,7 @@ app.put('/users/:userId/pages/:pageId', auth, function (req, res) {
     var update = {
         userId: req.params.userId,
         title: req.body.title,
-        objects: []
+        objects: req.body.objects
     };
 
     db.get('pages')

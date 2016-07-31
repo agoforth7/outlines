@@ -3,7 +3,6 @@ var Backbone = require('backbone');
 
 var app = require('../App/appController');
 var LoginView = require('./LoginView');
-var RegisterView = require('./RegisterView');
 var UserModel = require('./UserModel');
 
 module.exports = {
@@ -43,13 +42,12 @@ module.exports = {
         });
     },
 
-    register: function (options) {
-        var model = new UserModel(options);
+    register: function (credentials, success, error) {
+        var model = new UserModel(credentials);
 
         model.save(null, {
-            success: function () {
-                Backbone.history.navigate('login', { trigger: true });
-            }
+            success: success,
+            error: error
         });
     },
 
@@ -59,19 +57,17 @@ module.exports = {
 
         app.showPage(loginView);
 
-        loginView.on('submit', function (options) {
-            _this.login(options);
+        loginView.on('login', function (credentials) {
+            _this.login(credentials);
         });
-    },
 
-    showRegister: function () {
-        var _this = this;
-        var registerView = new RegisterView();
-
-        app.showPage(registerView);
-
-        registerView.on('submit', function (options) {
-            _this.register(options);
+        loginView.on('register', function (credentials) {
+            _this.register(credentials, function () {
+                loginView.showMessage('Registered succesfully! Log in with your new username and password.');
+                Backbone.history.navigate('login', { trigger: true });
+            }, function () {
+                loginView.showMessage('Registration failed!'); 
+            });
         });
     }
 

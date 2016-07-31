@@ -20,23 +20,28 @@
 		display: block;
 		text-align: center;
 
-		.login-signup {
+		.login-button,
+		.signup-button {
 			font-family: 'Atma-Bold';
 			font-size: 1.5em;
-			color: white;
+			color: #FFFFFF;
 			padding: .25em 1em;
 			background: none;
 			border: 2px solid $color-white;
 			border-radius: 10px;
 			margin: .25em;
+			outline: none;
+			cursor: pointer;
 
 			a {
-				color: white;
+				color: #FFFFFF;
 				text-decoration: none;
 			}
 		}
 
-		.login-signup:hover {
+		.login-button:hover,
+		.signup-button:hover,
+		.button-select {
 			background: $color-white;
 			color: $color-black;
 
@@ -47,8 +52,27 @@
 	}
 
 	.form-container {
-		display: block;
+		display: none;
 		text-align: center;
 		padding-top: 2em;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	#username,
+	#password {
+		background-color: $color-white;
+		border: none;
+		padding: .25em;
+	}
+
+	.submit-button {
+		color: #FFFFFF;
+		padding: .25em;
+		background: none;
+		border: 2px solid $color-white;
+		border-radius: 5px;
 	}
 }

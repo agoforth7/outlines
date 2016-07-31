@@ -6,8 +6,6 @@ module.exports = Backbone.View.extend({
 
 	className: 'library-item',
 
-	tagName: 'li',
-
 	events: {
 		'click': 'handleClick'
 	},

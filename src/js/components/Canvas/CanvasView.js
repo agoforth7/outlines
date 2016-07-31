@@ -1,6 +1,7 @@
 var Backbone = require('backbone');
 
 var LibraryView = require('./LibraryView');
+var LayerView = require('./LayerView');
 
 module.exports = Backbone.View.extend({
 
@@ -19,6 +20,10 @@ module.exports = Backbone.View.extend({
             collection: this.library,
             onItemClick: this.onLibraryItemClick.bind(this)
         });
+        this.layers = options.layers;
+        this.layerView = new LayerView({
+            model: this.layers
+        });
     },
 
     render: function () {
@@ -27,6 +32,8 @@ module.exports = Backbone.View.extend({
         }));
         this.libraryView.render();
         this.$('.library-region').append(this.libraryView.$el);
+        this.layerView.render();
+        this.$('.layers-region').append(this.layerView.$el);
     },
 
     template: function (data) {
@@ -34,6 +41,10 @@ module.exports = Backbone.View.extend({
         	<h2 contenteditable>${data.title}</h2>
             <div class="library-region"></div>
             <canvas class="canvas"></canvas>
+            <div class="layers-region"></div>
+            <button class="simple-mode">Simple</button>
+            <button class="mosaic-mode">Mosaic</button>
+            <button class="print">Print</button>
             <button class="reset">Reset</button>
         	<button class="save">Save</button>
         `;
@@ -56,12 +67,13 @@ module.exports = Backbone.View.extend({
     onLibraryItemClick: function (lineartModel) {
         console.log(lineartModel);
         // TODO: Something like this.
-        // var objects = this.page.get('objects');
-        // objects.push({
-        //     id: lineartModel.get('id'),
-        //     x: 0,
-        //     y: 0
-        // });
+        var objects = this.page.get('objects');
+        objects.push({
+            id: lineartModel.get('id'),
+            x: 0,
+            y: 0
+        });
+        this.page.save();
     }
 
 });

@@ -1,13 +1,10 @@
-// Takes a LineartCollection (this.collection) and renders a LibraryItemView for each
-// LineartModel.
+// Takes a LineartCollection (this.collection) and renders a LibraryCategoryView for each category
 
 var Backbone = require('backbone');
 
 var LibraryCategoryView = require('./LibraryCategoryView');
 
 module.exports = Backbone.View.extend({
-
-	tagName: 'ul',
 
 	className: 'library-list',
 
@@ -19,27 +16,68 @@ module.exports = Backbone.View.extend({
 	render: function () {
 		console.log(this.collection.length);
 		// TODO: Create a new LibraryCateogryView for each pre-determined category.
-		// 
-		// e.g.
-		// 
-
-		var beachCategoryView = new LibraryCategoryView({
-			category: 'beach',
+		var backgroundsCategoryView = new LibraryCategoryView({
+			category: 'backgrounds',
 			collection: this.collection,
 			onItemClick: this.onItemClick
 		});
 
-		beachCategoryView.render();
-		this.$el.append(beachCategoryView.$el);
+		backgroundsCategoryView.render();
+		this.$el.append(backgroundsCategoryView.$el.text('Backgrounds'));
 
-		var furnitureCategoryView = new LibraryCategoryView({
-			category: 'furniture',
+		var weatherCategoryView = new LibraryCategoryView({
+			category: 'weather',
 			collection: this.collection,
 			onItemClick: this.onItemClick
 		});
 
-		furnitureCategoryView.render();
-		this.$el.append(furnitureCategoryView.$el);
+		weatherCategoryView.render();
+		this.$el.append(weatherCategoryView.$el.text('Weather'));
+
+		var animalsCategoryView = new LibraryCategoryView({
+			category: 'animals',
+			collection: this.collection,
+			onItemClick: this.onItemClick
+		});
+
+		animalsCategoryView.render();
+		this.$el.append(animalsCategoryView.$el.text('Animals'));
+
+		var birdsCategoryView = new LibraryCategoryView({
+			category: 'birds',
+			collection: this.collection,
+			onItemClick: this.onItemClick
+		});
+
+		birdsCategoryView.render();
+		this.$el.append(birdsCategoryView.$el.text('Birds'));
+
+		var fishCategoryView = new LibraryCategoryView({
+			category: 'fish',
+			collection: this.collection,
+			onItemClick: this.onItemClick
+		});
+
+		fishCategoryView.render();
+		this.$el.append(fishCategoryView.$el.text('Fish'));
+
+		var plantsCategoryView = new LibraryCategoryView({
+			category: 'plants',
+			collection: this.collection,
+			onItemClick: this.onItemClick
+		});
+
+		plantsCategoryView.render();
+		this.$el.append(plantsCategoryView.$el.text('Plants'));
+
+		var objectsCategoryView = new LibraryCategoryView({
+			category: 'objects',
+			collection: this.collection,
+			onItemClick: this.onItemClick
+		});
+
+		objectsCategoryView.render();
+		this.$el.append(objectsCategoryView.$el.text('Objects'));
     }
 
 });

@@ -13604,78 +13604,96 @@ module.exports = Backbone.View.extend({
     className: 'login-container',
 
     events: {
-        'click .login-button': 'onLoginClick'
+        'click .login-button': 'onLoginClick',
+        'click .signup-button': 'onSignupClick',
+        'click .submit-button': 'onSubmitClick',
+        'keyup #password': 'onKeyup'
     },
 
     render: function () {
+        this.mode = 'login';
         this.$el.html(this.template());
     },
 
     template: function () {
-        console.log('Getting anything?');
         return `
             <img class="main-logo" src="assets/images/Logo.svg">
             <p class="intro">Helvetica salvia sustainable pork belly. Humblebrag sartorial street art, retro chambray kitsch blog deep v food truck fanny pack bespoke mumblecore. Shabby chic paleo chillwave selfies salvia helvetica VHS, raw denim keytar. Typewriter whatever tumblr, craft beer paleo before they sold out pop-up street art chia tote bag knausgaard. Franzen raw denim viral mixtape.</p>
             <div class="button-box">
-                <button class="login-signup">Login</button>
-                <button class="login-signup"><a href="#/register">Sign Up</a></button>
+                <button class="login-button">Login</button>
+                <button class="signup-button">Sign Up</button>
             </div>
+            <div class="message"></div>
             <div class="form-container">
                 <label for="username"></label>
                 <input id="username" type="text" name="username" placeholder="Username">
                 <label for="password"></label>
-                <input id="password" type="text" name="password" placeholder="Password">
+                <input id="password" type="password" name="password" placeholder="Password">
                 <button class="submit-button">Submit</button>
             </div>
         `;
     },
 
     onLoginClick: function () {
-        this.trigger('submit', {
+        this.mode = 'login';
+        this.updateButtons();
+        this.showForm();
+    },
+
+    onSignupClick: function () {
+        this.mode = 'register';
+        this.updateButtons();
+        this.showForm();
+    },
+
+    showForm: function () {
+        this.$el.find('input').val('');
+        this.$el.find('.form-container').addClass('active');
+    },
+
+    onSubmitClick: function () {
+        this.trigger(this.mode, {
             username: this.$('#username').val(),
             password: this.$('#password').val()
         });
+        this.$el.find('.form-container').removeClass('active');
+    },
+
+    updateButtons: function () {
+        // use this.mode to toggle a class on buttons
+        var logButton = this.$el.find('.login-button');
+        var signButton = this.$el.find('.signup-button');
+
+        if (this.mode === 'login') {
+            signButton.removeClass('button-select');
+            logButton.addClass('button-select');
+        } else {
+            logButton.removeClass('button-select');
+            signButton.addClass('button-select');
+        }
+    },
+
+    showMessage: function (message) {
+        var el = this.$el.find('.message');
+        el.addClass('visible');
+        el.text(message);
+    },
+
+    onKeyup: function (e) {
+        if (e.keyCode === 13) {
+            this.onSubmitClick();
+        }
     }
 
-});
-},{"./authController":9,"backbone":1}],7:[function(require,module,exports){
-var Backbone = require('backbone');
-
-var auth = require('./authController');
-
-module.exports = Backbone.View.extend({
-
-    className: 'login',
-
-    events: {
-        'click .login-button': 'onLoginClick'
-    },
-
-    render: function () {
-        this.$el.html(this.template());
-    },
-
-    template: function () {
-        return `
-            <h3>Register</h3>
-            <label for="username">Username</label>
-            <input id="username" type="text" name="username">
-            <label for="password">Password</label>
-            <input id="password" type="text" name="password">
-            <button class="login-button">Login</button>
-            <a href="#/register">Register</a>
-        `;
-    },
-
-    onLoginClick: function () {
-        this.trigger('submit', {
-            username: this.$('#username').val(),
-            password: this.$('#password').val()
-        });
-    }
+    // onLoginClick: function () {
+        // this.trigger('submit', {
+        //     username: this.$('#username').val(),
+        //     password: this.$('#password').val()
+        // });
+    // }
 
 });
-},{"./authController":9,"backbone":1}],8:[function(require,module,exports){
+},{"./authController":8,"backbone":1}],7:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
@@ -13695,13 +13713,12 @@ module.exports = Backbone.Model.extend({
     }
 
 });
-},{"backbone":1}],9:[function(require,module,exports){
+},{"backbone":1}],8:[function(require,module,exports){
 var $ = require('jquery');
 var Backbone = require('backbone');
 
 var app = require('../App/appController');
 var LoginView = require('./LoginView');
-var RegisterView = require('./RegisterView');
 var UserModel = require('./UserModel');
 
 module.exports = {
@@ -13741,13 +13758,12 @@ module.exports = {
         });
     },
 
-    register: function (options) {
-        var model = new UserModel(options);
+    register: function (credentials, success, error) {
+        var model = new UserModel(credentials);
 
         model.save(null, {
-            success: function () {
-                Backbone.history.navigate('login', { trigger: true });
-            }
+            success: success,
+            error: error
         });
     },
 
@@ -13757,24 +13773,22 @@ module.exports = {
 
         app.showPage(loginView);
 
-        loginView.on('submit', function (options) {
-            _this.login(options);
+        loginView.on('login', function (credentials) {
+            _this.login(credentials);
         });
-    },
 
-    showRegister: function () {
-        var _this = this;
-        var registerView = new RegisterView();
-
-        app.showPage(registerView);
-
-        registerView.on('submit', function (options) {
-            _this.register(options);
+        loginView.on('register', function (credentials) {
+            _this.register(credentials, function () {
+                loginView.showMessage('Registered succesfully! Log in with your new username and password.');
+                Backbone.history.navigate('login', { trigger: true });
+            }, function () {
+                loginView.showMessage('Registration failed!'); 
+            });
         });
     }
 
 };
-},{"../App/appController":5,"./LoginView":6,"./RegisterView":7,"./UserModel":8,"backbone":1,"jquery":2}],10:[function(require,module,exports){
+},{"../App/appController":5,"./LoginView":6,"./UserModel":7,"backbone":1,"jquery":2}],9:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var LineartModel = require('./LineartModel');
@@ -13788,7 +13802,7 @@ var LineartCollection = Backbone.Collection.extend({
 });
 
 module.exports = LineartCollection;
-},{"./LineartModel":11,"backbone":1}],11:[function(require,module,exports){
+},{"./LineartModel":10,"backbone":1}],10:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var LineartModel = Backbone.Model.extend({
@@ -13796,7 +13810,7 @@ var LineartModel = Backbone.Model.extend({
 });
 
 module.exports = LineartModel;
-},{"backbone":1}],12:[function(require,module,exports){
+},{"backbone":1}],11:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var PageModel = require('./PageModel');
@@ -13814,7 +13828,7 @@ var PageCollection = Backbone.Collection.extend({
 });
 
 module.exports = PageCollection;
-},{"../Auth/authController":9,"./PageModel":13,"backbone":1}],13:[function(require,module,exports){
+},{"../Auth/authController":8,"./PageModel":12,"backbone":1}],12:[function(require,module,exports){
 var Backbone = require('backbone');
 
 var auth = require('../Auth/authController');
@@ -13835,7 +13849,7 @@ var PageModel = Backbone.Model.extend({
 });
 
 module.exports = PageModel;
-},{"../Auth/authController":9,"backbone":1}],14:[function(require,module,exports){
+},{"../Auth/authController":8,"backbone":1}],13:[function(require,module,exports){
 var UserModel = require('../../../src/js/components/Auth/UserModel');
 
 describe('UserModel', function () {
@@ -13853,7 +13867,7 @@ describe('UserModel', function () {
 	});
 
 });
-},{"../../../src/js/components/Auth/UserModel":8}],15:[function(require,module,exports){
+},{"../../../src/js/components/Auth/UserModel":7}],14:[function(require,module,exports){
 var LineartCollection = require('../../../src/js/components/Lineart/LineartCollection');
 
 var LineartModel = require('../../../src/js/components/Lineart/LineartModel');
@@ -13877,7 +13891,7 @@ describe('LineartCollection', function () {
 	});
 
 });
-},{"../../../src/js/components/Lineart/LineartCollection":10,"../../../src/js/components/Lineart/LineartModel":11}],16:[function(require,module,exports){
+},{"../../../src/js/components/Lineart/LineartCollection":9,"../../../src/js/components/Lineart/LineartModel":10}],15:[function(require,module,exports){
 var PageCollection = require('../../../src/js/components/Pages/PageCollection');
 
 var PageModel = require('../../../src/js/components/Pages/PageModel');
@@ -13897,7 +13911,7 @@ describe('PageCollection', function () {
 	});
 
 });
-},{"../../../src/js/components/Pages/PageCollection":12,"../../../src/js/components/Pages/PageModel":13}],17:[function(require,module,exports){
+},{"../../../src/js/components/Pages/PageCollection":11,"../../../src/js/components/Pages/PageModel":12}],16:[function(require,module,exports){
 var PageModel = require('../../../src/js/components/Pages/PageModel');
 
 describe('PageModel', function () {
@@ -13919,7 +13933,7 @@ describe('PageModel', function () {
 	});
 
 });
-},{"../../../src/js/components/Pages/PageModel":13}],18:[function(require,module,exports){
+},{"../../../src/js/components/Pages/PageModel":12}],17:[function(require,module,exports){
 // Use the expect version of chai assertions - http://chaijs.com/api/bdd
 window.expect = chai.expect;
 
@@ -13931,4 +13945,4 @@ require('./Pages/PageCollection.test');
 require('./Lineart/LineartCollection.test');
 
 window.mocha.run();
-},{"./Auth/UserModel.test":14,"./Lineart/LineartCollection.test":15,"./Pages/PageCollection.test":16,"./Pages/PageModel.test":17}]},{},[18]);
+},{"./Auth/UserModel.test":13,"./Lineart/LineartCollection.test":14,"./Pages/PageCollection.test":15,"./Pages/PageModel.test":16}]},{},[17]);

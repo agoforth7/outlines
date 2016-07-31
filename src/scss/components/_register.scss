@@ -1,0 +1,28 @@
+.register-container {
+	display: block;
+	text-align: center;
+	padding-top: 2em;
+
+	// .active {
+	// 	display: block;
+	// }
+
+	#reg-username,
+	#reg-password {
+		background-color: $color-white;
+		border: none;
+		padding: .25em;
+	}
+
+	.reg-button {
+		padding: .25em;
+		background: none;
+		border: 2px solid $color-white;
+		border-radius: 5px;
+
+		a {
+			color: #FFFFFF;
+			text-decoration: none;
+		}
+	}
+}

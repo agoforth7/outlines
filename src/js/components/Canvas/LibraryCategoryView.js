@@ -6,8 +6,6 @@ module.exports = Backbone.View.extend({
 
 	className: 'library-category',
 
-	tagName: 'ul',
-
 	initialize: function (options) {
 		// shows a LibraryItemView for each LineartModel that has a certain category name
 		this.onItemClick = options.onItemClick;

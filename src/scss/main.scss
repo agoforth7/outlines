@@ -2,10 +2,18 @@
 @import 'vars';
 @import 'components/clearfix';
 @import 'components/login';
+@import 'components/register';
+@import 'components/library';
+@import 'components/canvas';
 
 @font-face {
   font-family: 'Atma-Bold';
   src: url('assets/fonts/Atma-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Atma-SemiBold';
+  src: url('assets/fonts/Atma-SemiBold.ttf');
 }
 
 @font-face {
@@ -25,6 +33,7 @@
 
 *, *:before, *:after {
 	box-sizing: border-box;
+	outline: none;
 }
 
 body {
