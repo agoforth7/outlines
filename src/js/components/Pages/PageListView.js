@@ -9,12 +9,12 @@ var PageListItemView = require('./PageListItemView');
 module.exports = Backbone.View.extend({
 
 	events: {
-		'click .create': 'onCreateClick'
+		'click .new': 'onNewClick'
 	},
 
     initialize: function () {
 		this.childViews = [];
-        this.listenTo(this.collection, 'update', this.render);
+        this.listenTo(this.collection, 'update destroy', this.render);
     },
 
     render: function () {
@@ -42,10 +42,10 @@ module.exports = Backbone.View.extend({
     },
 
     template: function () {
-    	return `<button class="create">Create</button>`;
+    	return `<button class="new">New</button>`;
     },
 
-    onCreateClick: function () {
+    onNewClick: function () {
 		Backbone.history.navigate('canvas', { trigger: true });
     }
 

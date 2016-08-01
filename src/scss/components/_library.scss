@@ -2,6 +2,24 @@
 
 }
 
+.library-category {
+
+	.list-region {
+		display: none;
+	}
+
+	&.expanded {
+
+		.list-region {
+			display: block;
+		}
+
+	}
+
+}
+
 .library-item {
-	
+	width: 50%;
+	display: inline-block;
+	padding: 0.5em;
 }

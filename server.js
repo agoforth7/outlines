@@ -172,6 +172,7 @@ app.post('/users/:id/pages', auth, function (req, res) {
 		id: uuid(),
 		userId: req.params.id,
 		title: req.body.title,
+        date: req.body.date,
 		objects: []
 	};
 
@@ -196,6 +197,7 @@ app.put('/users/:userId/pages/:pageId', auth, function (req, res) {
     var update = {
         userId: req.params.userId,
         title: req.body.title,
+        date: req.body.date,
         objects: req.body.objects
     };
 
@@ -206,6 +208,16 @@ app.put('/users/:userId/pages/:pageId', auth, function (req, res) {
 
     res.json(update);
  
+});
+
+app.delete('/users/:userId/pages/:pageId', auth, function (req, res) {
+    // Update a single page
+
+    db.get('pages')
+        .remove({ id: req.params.pageId })
+        .value();
+
+    res.sendStatus(200);
 });
 
 app.listen(8000);

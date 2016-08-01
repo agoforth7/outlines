@@ -1,0 +1,79 @@
+.editor {
+	text-align: center;
+
+	h2 {
+		font-family: 'Atma-Bold';
+		color: $color-white;
+		margin: .5em;
+	}
+
+	.return-button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		font-family: 'Atma-SemiBold';
+		font-size: 1em;
+		color: #FFFFFF;
+		padding: .25em;
+		background: none;
+		border: 2px solid $color-white;
+		border-radius: 10px;
+		outline: none;
+		cursor: pointer;
+	}
+}
+
+.library-region {
+	float: left;
+	width: 21%;
+	padding: 2%;
+
+	.library-category {
+		width: 100%;
+		border: none;
+		border-radius: 5px;
+		background-color: $color-white;
+		padding: 1em;
+		margin: .5em 0;
+		outline: none;
+		cursor: pointer;
+
+		h3 {
+			font-family: 'Atma-SemiBold';
+			font-size: 1em;
+			color: $color-black;
+			text-align: center;
+			margin: 0;
+		}
+	}
+
+}
+
+.canvas-region {
+	float: left;
+	width: 60%;
+	background-color: #FFF;
+}
+
+.layers-region {
+	float: left;
+	width: 19%;
+}
+
+@media (min-width: 872px) {
+	.library-region {
+
+		.library-category {
+			font-size: 1.25em;
+		}
+	}
+}
+
+@media (min-width: 1080px) {
+	.library-region {
+
+		.library-category {
+			font-size: 1.5em;
+		}
+	}
+}

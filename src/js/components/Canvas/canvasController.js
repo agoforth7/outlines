@@ -1,5 +1,5 @@
 var PageModel = require('../Pages/PageModel');
-var CanvasView = require('./CanvasView');
+var EditorView = require('./editorView');
 
 var app = require('../App/appController');
 var auth = require('../Auth/authController');
@@ -13,7 +13,7 @@ module.exports = {
 	showCanvas: function (id) {
 		auth.check(function () {
 			var page;
-			var canvasView;
+			var editorView;
 
 			// If there was an id passed to showCanvas
 			if (id) {
@@ -22,25 +22,25 @@ module.exports = {
 				// Fetch it
 				page.fetch({
 					success: function () {
-						// Create and render a CanvasView with the fetched model
-						canvasView = new CanvasView({ 
+						// Create and render a editorView with the fetched model
+						editorView = new EditorView({ 
 							page: page,
 							library: library
 						});
 						
-						app.showPage(canvasView);
+						app.showPage(editorView);
 					}
 				});
 			} else {
 				// Create a new (blank) PageModel with no id
 				page = new PageModel();
-				// Create and render a CanvasView with a new page
-				canvasView = new CanvasView({
+				// Create and render a editorView with a new page
+				editorView = new EditorView({
 					page: page,
 					library: library
 				});
 				
-				app.showPage(canvasView);
+				app.showPage(editorView);
 			}
 		});
 	}

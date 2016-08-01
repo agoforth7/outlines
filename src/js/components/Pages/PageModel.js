@@ -5,10 +5,14 @@ var auth = require('../Auth/authController');
 var PageModel = Backbone.Model.extend({
 
 	defaults: {
-
 		title: 'New Page',
 		objects: []
+	},
 
+	initialize: function () {
+		if (this.isNew()) {
+			this.set('date', new Date().getTime());
+		}
 	},
 	
 	urlRoot: function () {

@@ -19,9 +19,15 @@ module.exports = Backbone.View.extend({
 
     template: function (data) {
         return `
-            <h3>Welcome, ${data.username}.</h3>
-            <a href="#/logout">Logout</a>
-            <div class="page-list-region"></div>
+            <img class="logo-sub" src="assets/images/Logo-sub.svg">
+            <button class="logout-button">
+                <a href="#/logout">Logout</a>
+            </button>
+            <div class="gallery-intro">
+                <h3>Welcome, ${data.username}.</h3>
+                <p>Here’s your gallery! Revisit one of your past pages, or begin a new one!</p>
+            </div>
+            <div class="page-list-region clearfix"></div>
         `;
     }
 

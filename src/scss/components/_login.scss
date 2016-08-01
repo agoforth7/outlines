@@ -75,4 +75,11 @@
 		border: 2px solid $color-white;
 		border-radius: 5px;
 	}
+
+	.message {
+		font-family: 'OpenSans-Semibold';
+		font-size: 1.25em;
+		color: $color-white;
+		margin-top: .5em;
+	}
 }

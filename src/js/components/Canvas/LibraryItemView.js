@@ -1,5 +1,4 @@
-// LibraryItemView takes a LineartModel (this.model) and displays a small
-// thumnbail (SVG) of the lineart.
+// LibraryItemView takes a LineartModel (this.model) and displays a small thumnbail (SVG) of the lineart.
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
@@ -12,16 +11,28 @@ module.exports = Backbone.View.extend({
 
 	initialize: function (options) {
 		this.onClick = options.onClick;
+		this.textMode = options.textMode;
 	},
 
 	render: function () {
-		this.$el.html(this.template({
-			img: this.model.get('img')
-		}));
+		if (this.textMode) {
+			this.$el.html(this.textTemplate({
+				title: this.model.get('title')
+			}));
+		} else {
+			this.$el.html(this.template({
+				img: this.model.get('img')
+			}));
+		}
 	},
 
 	template: function (data) {
 		return `${data.img}`;
+	},
+
+
+	textTemplate: function (data) {
+		return `${data.title}`;
 	},
 
 	handleClick: function () {

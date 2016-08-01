@@ -6,7 +6,7 @@ var LibraryCategoryView = require('./LibraryCategoryView');
 
 module.exports = Backbone.View.extend({
 
-	className: 'library-list',
+	className: 'library',
 
 	initialize: function (options) {
 		this.onItemClick = options.onItemClick;
@@ -14,16 +14,17 @@ module.exports = Backbone.View.extend({
 	},
 
 	render: function () {
-		console.log(this.collection.length);
-		// TODO: Create a new LibraryCateogryView for each pre-determined category.
+		this.$el.empty();
+
 		var backgroundsCategoryView = new LibraryCategoryView({
 			category: 'backgrounds',
 			collection: this.collection,
-			onItemClick: this.onItemClick
+			onItemClick: this.onItemClick,
+			textMode: true
 		});
 
 		backgroundsCategoryView.render();
-		this.$el.append(backgroundsCategoryView.$el.text('Backgrounds'));
+		this.$el.append(backgroundsCategoryView.$el);
 
 		var weatherCategoryView = new LibraryCategoryView({
 			category: 'weather',
@@ -32,7 +33,7 @@ module.exports = Backbone.View.extend({
 		});
 
 		weatherCategoryView.render();
-		this.$el.append(weatherCategoryView.$el.text('Weather'));
+		this.$el.append(weatherCategoryView.$el);
 
 		var animalsCategoryView = new LibraryCategoryView({
 			category: 'animals',
@@ -41,7 +42,7 @@ module.exports = Backbone.View.extend({
 		});
 
 		animalsCategoryView.render();
-		this.$el.append(animalsCategoryView.$el.text('Animals'));
+		this.$el.append(animalsCategoryView.$el);
 
 		var birdsCategoryView = new LibraryCategoryView({
 			category: 'birds',
@@ -50,7 +51,7 @@ module.exports = Backbone.View.extend({
 		});
 
 		birdsCategoryView.render();
-		this.$el.append(birdsCategoryView.$el.text('Birds'));
+		this.$el.append(birdsCategoryView.$el);
 
 		var fishCategoryView = new LibraryCategoryView({
 			category: 'fish',
@@ -59,7 +60,7 @@ module.exports = Backbone.View.extend({
 		});
 
 		fishCategoryView.render();
-		this.$el.append(fishCategoryView.$el.text('Fish'));
+		this.$el.append(fishCategoryView.$el);
 
 		var plantsCategoryView = new LibraryCategoryView({
 			category: 'plants',
@@ -68,7 +69,7 @@ module.exports = Backbone.View.extend({
 		});
 
 		plantsCategoryView.render();
-		this.$el.append(plantsCategoryView.$el.text('Plants'));
+		this.$el.append(plantsCategoryView.$el);
 
 		var objectsCategoryView = new LibraryCategoryView({
 			category: 'objects',
@@ -77,7 +78,7 @@ module.exports = Backbone.View.extend({
 		});
 
 		objectsCategoryView.render();
-		this.$el.append(objectsCategoryView.$el.text('Objects'));
+		this.$el.append(objectsCategoryView.$el);
     }
 
 });
