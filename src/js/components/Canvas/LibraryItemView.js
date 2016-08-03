@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
 			this.$el.html(this.textTemplate({
 				title: this.model.get('title')
 			}));
+			this.$el.addClass('textModeClass');
 		} else {
 			this.$el.html(this.template({
 				img: this.model.get('img')
@@ -32,11 +33,17 @@ module.exports = Backbone.View.extend({
 
 
 	textTemplate: function (data) {
-		return `${data.title}`;
+		return `
+			<div class="white-line"></div>
+			<p>${data.title}</p>
+		`;
 	},
 
 	handleClick: function () {
-		this.onClick(this.model);
+
+		console.log( "clicked: ", this, this.model );
+		
+		this.onClick( this.model );
 	}
 
 });

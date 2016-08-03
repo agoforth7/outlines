@@ -28,7 +28,9 @@ module.exports = Backbone.View.extend({
 
     template: function (data) {
         return `
-            <div class="page-thumb"></div>
+            <div class="page-thumb">
+                <h3 class="page-title">` + this.model.get('title') + `</div>
+            </div>
             <time>${data.date}</time>
             <button class="item-delete-button">Delete</button>
         `;

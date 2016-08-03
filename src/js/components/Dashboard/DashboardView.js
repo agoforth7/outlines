@@ -4,6 +4,10 @@ var PageListView = require('../Pages/PageListView');
 
 module.exports = Backbone.View.extend({
 
+    events: {
+        'click .new-button': 'onNewClick'
+    },
+
     initialize: function (options) {
         this.user = options.user;
         this.pages = options.pages;
@@ -27,8 +31,12 @@ module.exports = Backbone.View.extend({
                 <h3>Welcome, ${data.username}.</h3>
                 <p>Here’s your gallery! Revisit one of your past pages, or begin a new one!</p>
             </div>
+            <button class="new-button">New Page</button>
             <div class="page-list-region clearfix"></div>
         `;
-    }
+    },
 
+    onNewClick: function () {
+        Backbone.history.navigate('canvas', { trigger: true });
+    }
 });

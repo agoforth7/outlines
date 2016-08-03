@@ -8,9 +8,9 @@ var PageListItemView = require('./PageListItemView');
 
 module.exports = Backbone.View.extend({
 
-	events: {
-		'click .new': 'onNewClick'
-	},
+	// events: {
+	// 	'click .new-button': 'onNewClick'
+	// },
 
     initialize: function () {
 		this.childViews = [];
@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
     render: function () {
 		var _this = this;
 
-		this.$el.html(this.template());
+		// this.$el.html(this.template());
 
 		// Remove any previous views.
 		this.childViews.forEach(function (view) {
@@ -41,12 +41,12 @@ module.exports = Backbone.View.extend({
 		});
     },
 
-    template: function () {
-    	return `<button class="new">New</button>`;
-    },
+    // template: function () {
+    // 	return `<button class="new-button">New Page</button>`;
+    // },
 
-    onNewClick: function () {
-		Backbone.history.navigate('canvas', { trigger: true });
-    }
+  //   onNewClick: function () {
+		// Backbone.history.navigate('canvas', { trigger: true });
+  //   }
 
 });

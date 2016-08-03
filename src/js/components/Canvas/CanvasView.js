@@ -20,8 +20,13 @@ module.exports = Backbone.View.extend({
 		window.canvas = this;
 		this.page = options.page;
 		this.library = options.library;
+
+		this.defaultWidth = 500;
+		this.scale = 1;
+		
 		this.step = this.step.bind(this);
 		this.resize = this.resize.bind(this);
+
 		// The images object is a key/value collection where
 		// the keys are lineartIds and the values are the
 		// images we generate for the SVGs.
@@ -51,19 +56,26 @@ module.exports = Backbone.View.extend({
 		}
 
 		width = this.el.parentElement.clientWidth;
-		height = width * 1.3;
+
+		// height = width * 1.3;
+		height = width * .773;
+		
+		this.scale = this.el.parentElement.clientWidth / this.defaultWidth;
 
 		this.el.width = width * devicePixelRatio;
 		this.el.height = height * devicePixelRatio;
-
 		this.el.style.width = width + 'px';
 		this.el.style.height = height + 'px';
 	},
 
 	addImage: function (lineartId) {
-		var image = new Image();
+		
+		var image = new Image(),
+			that = this;
 
 		var lineart = this.library.find({ id: lineartId });
+
+		console.log( lineart );
 
 		// Create a 'file'
 		var file = new Blob([ lineart.get('img') ], { type: 'image/svg+xml;charset=utf-8' });
@@ -72,12 +84,12 @@ module.exports = Backbone.View.extend({
 
 		image.onload = function () {
 			// Remove the URL (free up resources)
-			// domUrl.revokeObjectURL(src);
+			domUrl.revokeObjectURL(src);
+			// console.log( image );
+			that.images[lineartId] = { image: image, model:lineart };
 		};
 
 		image.src = src;
-
-		this.images[lineartId] = image;
 	},
 
 	start: function () {
@@ -89,6 +101,7 @@ module.exports = Backbone.View.extend({
 	},
 
 	step: function () {
+
 		var object;
 		var objects = this.page.get('objects');
 		var image;
@@ -97,19 +110,23 @@ module.exports = Backbone.View.extend({
 
 		this.clear();
 
+		// console.log( objects );
+
 		for (var i = 0; i < objects.length; i++) {
 			object = objects[i];
 			image = this.images[object.lineartId];
+
 			if (!image) {
 				this.addImage(object.lineartId);
-			} else {
-				width = 300;
-				height = width * image.height / image.width;
-				
-				object.width = width * devicePixelRatio;
-				object.height = height * devicePixelRatio;
 
-				this.drawImage(image, object.x, object.y, object.width, object.height);
+			} else {  
+				width = this.el.width * image.model.get("screen-width");
+				height = width / image.model.get("aspect-ratio");
+				
+				object.width = width;
+				object.height = height;
+
+				this.drawImage(image.image, object.x, object.y, object.width, object.height);
 			}
 		}
 	},
@@ -171,6 +188,7 @@ module.exports = Backbone.View.extend({
 		var mouseY = (e.clientY - canvasPosition.top) * devicePixelRatio;
 
 		this.trigger('up', mouseX, mouseY);
+		this.start();
 	}
 
 });

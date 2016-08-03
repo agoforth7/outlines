@@ -21,7 +21,7 @@ module.exports = Backbone.View.extend({
     template: function () {
         return `
             <img class="main-logo" src="assets/images/Logo.svg">
-            <p class="intro">Helvetica salvia sustainable pork belly. Humblebrag sartorial street art, retro chambray kitsch blog deep v food truck fanny pack bespoke mumblecore. Shabby chic paleo chillwave selfies salvia helvetica VHS, raw denim keytar. Typewriter whatever tumblr, craft beer paleo before they sold out pop-up street art chia tote bag knausgaard. Franzen raw denim viral mixtape.</p>
+            <p class="intro">take your coloring game to the next level</p>
             <div class="button-box">
                 <button class="login-button">Login</button>
                 <button class="signup-button">Sign Up</button>

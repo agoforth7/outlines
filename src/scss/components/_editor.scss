@@ -10,55 +10,78 @@
 	.return-button {
 		position: absolute;
 		top: 0;
-		right: 0;
-		font-family: 'Atma-SemiBold';
-		font-size: 1em;
-		color: #FFFFFF;
-		padding: .25em;
-		background: none;
-		border: 2px solid $color-white;
-		border-radius: 10px;
-		outline: none;
-		cursor: pointer;
-	}
-}
-
-.library-region {
-	float: left;
-	width: 21%;
-	padding: 2%;
-
-	.library-category {
-		width: 100%;
+		right: 2%;
+		font-family: 'OpenSans-Semibold';
+		font-size: .75em;
+		// width: 100%;
 		border: none;
 		border-radius: 5px;
 		background-color: $color-white;
-		padding: 1em;
+		padding: .5em;
 		margin: .5em 0;
 		outline: none;
 		cursor: pointer;
-
-		h3 {
-			font-family: 'Atma-SemiBold';
-			font-size: 1em;
-			color: $color-black;
-			text-align: center;
-			margin: 0;
-		}
+		// font-family: 'Atma-SemiBold';
+		// font-size: 1em;
+		// color: #FFFFFF;
+		// padding: .25em;
+		// background: none;
+		// border: 2px solid $color-white;
+		// border-radius: 10px;
+		// outline: none;
+		// cursor: pointer;
 	}
-
 }
 
 .canvas-region {
 	float: left;
 	width: 60%;
+	margin-top: .5em;
 	background-color: #FFF;
 }
 
-.layers-region {
+.button-container {
+	width: 16%;
+	padding: 0 2%;
 	float: left;
-	width: 19%;
+
+	.save,
+	.reset,
+	.print,
+	.simple-mode,
+	.mosaic-mode {
+		width: 100%;
+		margin: .5em 0;
+		font-family: 'Atma-SemiBold';
+		font-size: 1em;
+		color: #FFFFFF;
+		padding: .25em;
+		background: none;
+		border: 1px solid $color-white;
+		border-radius: 7px;
+		outline: none;
+		cursor: pointer;
+		// font-family: 'OpenSans-Semibold';
+		// font-size: .75em;
+		// width: 100%;
+		// border: none;
+		// border-radius: 5px;
+		// background-color: $color-white;
+		// padding: .5em;
+		// margin: .5em 0;
+		// outline: none;
+		// cursor: pointer;
+	}
+
+	.simple-mode {
+		margin-top: 10em;
+	}
 }
+
+// .layers-region {
+// 	float: left;
+// 	width: 19%;
+// }
 
 @media (min-width: 872px) {
 	.library-region {

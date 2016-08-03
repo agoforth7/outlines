@@ -33,11 +33,11 @@ module.exports = Backbone.View.extend({
             library: this.library
         });
         
-        this.layers = options.layers;
+        // this.layers = options.layers;
         
-        this.layerView = new LayerView({
-            model: this.layers
-        });
+        // this.layerView = new LayerView({
+        //     model: this.layers
+        // });
 
         this.listenTo(this.canvasView, 'select', this.onCanvasSelect);
         this.listenTo(this.canvasView, 'move', this.onCanvasMove);
@@ -51,8 +51,8 @@ module.exports = Backbone.View.extend({
         }));
         this.libraryView.render();
         this.$('.library-region').append(this.libraryView.$el);
-        this.layerView.render();
-        this.$('.layers-region').append(this.layerView.$el);
+        // this.layerView.render();
+        // this.$('.layers-region').append(this.layerView.$el);
         this.canvasView.render();
         this.$('.canvas-region').append(this.canvasView.$el);
         this.canvasView.start();
@@ -65,13 +65,14 @@ module.exports = Backbone.View.extend({
             <div class="editor cf">
                 <div class="library-region"></div>
                 <div class="canvas-region"></div>
-                <div class="layers-region"></div>
+                <div class="button-container">
+                    <button class="save">Save</button>
+                    <button class="reset">Reset</button>
+                    <button class="print">Print</button>
+                    <button class="simple-mode">Simple</button>
+                    <button class="mosaic-mode">Mosaic</button>
+                </div>
             </div>
-            <button class="simple-mode">Simple</button>
-            <button class="mosaic-mode">Mosaic</button>
-            <button class="print">Print</button>
-            <button class="reset">Reset</button>
-        	<button class="save">Save</button>
         `;
     },
 
