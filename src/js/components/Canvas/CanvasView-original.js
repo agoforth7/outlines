@@ -131,9 +131,12 @@ module.exports = Backbone.View.extend({
 
 	start: function () {
 		var _this = this;
+		this.running = true;
 		requestAnimationFrame(function step () {
 			_this.step();
-			requestAnimationFrame(step);
+			if (_this.running) {
+				requestAnimationFrame(step);
+			}
 		});
 	},
 
@@ -226,6 +229,11 @@ module.exports = Backbone.View.extend({
 
 		this.trigger('up', mouseX, mouseY);
 		this.start();
+	},
+
+	remove: function () {
+		Backbone.View.prototype.remove.call(this);
+		this.running = false;
 	}
 
 });

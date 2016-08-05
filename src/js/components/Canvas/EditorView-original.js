@@ -155,6 +155,11 @@ module.exports = Backbone.View.extend({
     onSimpleModeClick: function () {
         this.page.set('mode', 'simple');
         this.canvasView.clearImages();
+    },
+
+    remove: function () {
+        this.canvasView.remove();
+        Backbone.View.prototype.remove.call(this);
     }
 
 });
