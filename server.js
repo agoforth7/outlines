@@ -222,7 +222,7 @@ app.delete('/users/:userId/pages/:pageId', auth, function (req, res) {
     res.sendStatus(200);
 });
 
-app.listen(8000);
+app.listen(process.env.PORT || 8000);
 
 
 // GET (app.get()) individual drawings, pages
