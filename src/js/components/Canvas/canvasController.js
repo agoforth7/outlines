@@ -1,12 +1,11 @@
 var PageModel = require('../Pages/PageModel');
-var EditorView = require('./editorView');
+var EditorView = require('./EditorView-original');
 
 var app = require('../App/appController');
 var auth = require('../Auth/authController');
 var LineartCollection = require('../Lineart/LineartCollection');
 
 var library = new LineartCollection();
-library.fetch();
 
 module.exports = {
 	
@@ -14,6 +13,8 @@ module.exports = {
 		auth.check(function () {
 			var page;
 			var editorView;
+
+			library.fetch();
 
 			// If there was an id passed to showCanvas
 			if (id) {

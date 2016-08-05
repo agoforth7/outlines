@@ -10,7 +10,7 @@ module.exports = Backbone.View.extend({
         'click .login-button': 'onLoginClick',
         'click .signup-button': 'onSignupClick',
         'click .submit-button': 'onSubmitClick',
-        'keyup #password': 'onKeyup'
+        'keyup': 'onKeyup'
     },
 
     render: function () {

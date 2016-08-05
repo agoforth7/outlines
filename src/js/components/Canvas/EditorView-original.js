@@ -1,7 +1,7 @@
 var Backbone = require('backbone');
 
 var LibraryView = require('./LibraryView');
-var CanvasView = require('./CanvasView');
+var CanvasView = require('./CanvasView-original');
 var LayerView = require('./LayerView');
 
 module.exports = Backbone.View.extend({
@@ -13,7 +13,10 @@ module.exports = Backbone.View.extend({
         'keyup h2': 'onTitleKeyup',
         'click .return-button': 'onReturnClick',
         'click .reset': 'onResetClick',
-        'mouseup .canvas-region': 'onCanvasMouseup'
+        'click .print': 'onPrintClick',
+        'mouseup .canvas-region': 'onCanvasMouseup',
+        'click .mosaic-mode': 'onMosaicModeClick',
+        'click .simple-mode': 'onSimpleModeClick'
     },
 
     initialize: function (options) {
@@ -77,9 +80,15 @@ module.exports = Backbone.View.extend({
     },
 
     onSaveClick: function () {
+        var _this = this;
+
         // Update the date to now...
         this.page.set('date', new Date().getTime());
-    	this.page.save();
+    	this.page.save(null, {
+            success: function () {
+                Backbone.history.navigate('canvas/' + _this.page.get('id'));
+            }
+        });
         // TODO: generate the date the page was saved
     },
 
@@ -97,8 +106,19 @@ module.exports = Backbone.View.extend({
         this.page.set('objects', []);
     },
 
+    onPrintClick: function () {
+        var win = window.open();
+        win.document.write(`
+            <style>
+                body { margin: 0; }
+            </style>
+            <img style="height: 100%" src="${this.canvasView.el.toDataURL()}">
+        `);
+        win.print();
+        win.location.reload();
+    },
+
     onLibraryItemClick: function (lineartModel) {
-        console.log(lineartModel);
         // TODO: Something like this.
         var objects = this.page.get('objects');
         objects.push({
@@ -106,7 +126,6 @@ module.exports = Backbone.View.extend({
             x: 0,
             y: 0
         });
-        this.page.save();
     },
 
     onCanvasSelect: function (object, offsetX, offsetY) {
@@ -126,6 +145,16 @@ module.exports = Backbone.View.extend({
 
     onCanvasUp: function (x, y) {
         this.dragging = null;
+    },
+
+    onMosaicModeClick: function () {
+        this.page.set('mode', 'mosaic');
+        this.canvasView.clearImages();
+    },
+
+    onSimpleModeClick: function () {
+        this.page.set('mode', 'simple');
+        this.canvasView.clearImages();
     }
 
 });

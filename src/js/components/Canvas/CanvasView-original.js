@@ -4,6 +4,32 @@ var Backbone = require('backbone');
 var devicePixelRatio = window.devicePixelRatio;
 var domUrl = window.URL || window.webkitURL || window;
 
+// Converts a string into an element.
+function toEl (string) {
+	var div = document.createElement('div');
+	
+	div.innerHTML = string;
+	
+	var result = div.children[0];
+
+	result.parentElement.removeChild(result);
+
+	return result;
+}
+
+// The inverse of toEl
+function toHTML (el) {
+	var div = document.createElement('div');
+	
+	div.appendChild(el);
+	
+	var result = div.innerHTML;
+
+	div.removeChild(el);
+
+	return result;
+}
+
 module.exports = Backbone.View.extend({
 
 	tagName: 'canvas',
@@ -68,6 +94,10 @@ module.exports = Backbone.View.extend({
 		this.el.style.height = height + 'px';
 	},
 
+	clearImages: function () {
+		this.images = {};
+	},
+
 	addImage: function (lineartId) {
 		
 		var image = new Image(),
@@ -75,10 +105,17 @@ module.exports = Backbone.View.extend({
 
 		var lineart = this.library.find({ id: lineartId });
 
-		console.log( lineart );
+		// Turn the SVG string into an Element
+		var svgString;
+
+		if (this.page.get('mode') === 'mosaic') {
+			svgString = lineart.get('img-mosaic');
+		}
+
+		svgString = svgString || lineart.get('img');
 
 		// Create a 'file'
-		var file = new Blob([ lineart.get('img') ], { type: 'image/svg+xml;charset=utf-8' });
+		var file = new Blob([ svgString ], { type: 'image/svg+xml;charset=utf-8' });
 		// Create a URL for the 'file'
 		var src = domUrl.createObjectURL(file);
 
@@ -86,7 +123,7 @@ module.exports = Backbone.View.extend({
 			// Remove the URL (free up resources)
 			domUrl.revokeObjectURL(src);
 			// console.log( image );
-			that.images[lineartId] = { image: image, model:lineart };
+			that.images[lineartId] = { image: image, model: lineart };
 		};
 
 		image.src = src;

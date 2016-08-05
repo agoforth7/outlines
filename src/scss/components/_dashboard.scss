@@ -85,14 +85,6 @@
 		margin: 0 auto;
 		width: 90%;
 
-		// .new {
-		// 	width: 100%;
-		// 	background-color: #FFF;
-		// 	border: none;
-		// 	outline: none;
-		// 	cursor: pointer;
-		// }
-
 		.page-item {
 			width: 25%;
 			padding: 1em;
@@ -136,6 +128,16 @@
 				background: $color-white;
 				color: $color-black;
 			}
+		}
+	}
+}
+
+@media (min-width: 872px) {
+	.page-list-region {
+		width: 85%;
+
+		.page-item {
+			padding: 2em;
 		}
 	}
 }

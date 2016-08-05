@@ -21,15 +21,6 @@
 		margin: .5em 0;
 		outline: none;
 		cursor: pointer;
-		// font-family: 'Atma-SemiBold';
-		// font-size: 1em;
-		// color: #FFFFFF;
-		// padding: .25em;
-		// background: none;
-		// border: 2px solid $color-white;
-		// border-radius: 10px;
-		// outline: none;
-		// cursor: pointer;
 	}
 }
 
@@ -42,7 +33,8 @@
 
 .button-container {
 	width: 16%;
-	padding: 0 2%;
+	padding: 0 3%;
+	margin-left: .75em;
 	float: left;
 
 	.save,
@@ -61,27 +53,21 @@
 		border-radius: 7px;
 		outline: none;
 		cursor: pointer;
-		// font-family: 'OpenSans-Semibold';
-		// font-size: .75em;
-		// width: 100%;
-		// border: none;
-		// border-radius: 5px;
-		// background-color: $color-white;
-		// padding: .5em;
-		// margin: .5em 0;
-		// outline: none;
-		// cursor: pointer;
+	}
+
+	.save:hover,
+	.reset:hover,
+	.print:hover,
+	.simple-mode:hover,
+	.mosaic-mode:hover {
+		background: $color-white;
+		color: $color-black;
 	}
 
 	.simple-mode {
-		margin-top: 10em;
+		margin-top: 10.25em;
 	}
 }
-
-// .layers-region {
-// 	float: left;
-// 	width: 19%;
-// }
 
 @media (min-width: 872px) {
 	.library-region {
@@ -90,12 +76,32 @@
 			font-size: 1.25em;
 		}
 	}
+
+	.button-container {
+		.save,
+		.reset,
+		.print,
+		.simple-mode,
+		.mosaic-mode {
+			font-size: 1.15em;
+		}
+	}
 }
 
 @media (min-width: 1080px) {
 	.library-region {
 
 		.library-category {
+			font-size: 1.5em;
+		}
+	}
+
+	.button-container {
+		.save,
+		.reset,
+		.print,
+		.simple-mode,
+		.mosaic-mode {
 			font-size: 1.5em;
 		}
 	}

@@ -173,7 +173,8 @@ app.post('/users/:id/pages', auth, function (req, res) {
 		userId: req.params.id,
 		title: req.body.title,
         date: req.body.date,
-		objects: []
+        mode: req.body.mode,
+		objects: req.body.objects
 	};
 
 	db.get('pages')
@@ -198,7 +199,8 @@ app.put('/users/:userId/pages/:pageId', auth, function (req, res) {
         userId: req.params.userId,
         title: req.body.title,
         date: req.body.date,
-        objects: req.body.objects
+        objects: req.body.objects,
+        mode: req.body.mode
     };
 
     db.get('pages')

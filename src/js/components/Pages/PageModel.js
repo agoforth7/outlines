@@ -6,6 +6,7 @@ var PageModel = Backbone.Model.extend({
 
 	defaults: {
 		title: 'New Page',
+		mode: 'simple',
 		objects: []
 	},
 
